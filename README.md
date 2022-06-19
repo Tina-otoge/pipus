@@ -6,7 +6,9 @@ of Python packages in your user directory.
 
 pip lacks the ability to keep track of which packages were manually installed
 and which came as dependencies. When installing packages in your home, this
-quickly becomes an issue if you ever want to update the packages you installed.
+quickly becomes an issue if you ever want to update the packages you installed
+and do not care about updating the dependency packages if the dependent ones
+did not receive any update.
 
 *pipus* fixes this by maintaning a file, similar to the familiar
 requirements.txt file, in which the manually installed packages are listed.
