@@ -7,7 +7,7 @@ import sys
 from .args import args, parser
 
 
-INSTALL_CMD = ['pip', 'install', '--user', '-U']
+INSTALL_CMD = 'python -m pip install --user -U'.split()
 
 
 def command(f):
