@@ -4,6 +4,7 @@ import subprocess
 import site
 import sys
 
+from . import __version__
 from .args import args, parser
 
 
@@ -76,7 +77,7 @@ def save_pkgs(l):
     if args.no_write:
         warn("Not writting packages list because we were asked not to")
         return
-    pkgs = set(l)
+    pkgs = set(sorted(l))
     with args.file.open('w') as f:
         f.write('\n'.join(pkgs) + '\n')
 
@@ -146,27 +147,41 @@ def print_list():
     print('\n'.join(get_pkgs()))
 
 
-# main
+@command
+def print_version():
+    print(__version__)
 
-if args.help:
-    parser.print_help()
-    exit()
 
-if args.list:
-    print_list()
+def main():
+    if args.quiet:
+        INSTALL_CMD.append('-q')
 
-if args.refresh:
-    refresh()
+    if args.verbose:
+        INSTALL_CMD.append('-vvv')
 
-if args.remove:
-    if not args.packages:
-        abort("You must specify which packages to remove")
-    if args.no_write:
-        abort("Uninstalling is incompatible with not writing changes")
-    uninstall(args.packages)
+    if args.help:
+        parser.print_help()
+        exit()
 
-if args.packages:
-    install(args.packages)
+    if args.list:
+        print_list()
 
-if args.update or not args.packages:
-    update()
+    if args.refresh:
+        refresh()
+
+    if args.remove:
+        if not args.packages:
+            abort("You must specify which packages to remove")
+        if args.no_write:
+            abort("Uninstalling is incompatible with not writing changes")
+        uninstall(args.packages)
+
+    if args.packages:
+        install(args.packages)
+
+    if args.update or not args.packages:
+        update()
+
+
+if __name__ == '__main__':
+    main()

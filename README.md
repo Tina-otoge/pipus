@@ -1,5 +1,5 @@
 # pipus
-<ins>**pip**</ins> helper for <ins>**u**</ins>ser <ins>**s**</ins>ite packages
+**pip** helper for **u**ser **s**ite packages
 
 *pipus* is a very simple wrapper around pip to help you manage the installation
 of Python packages in your user directory.
